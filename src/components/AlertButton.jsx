@@ -19,7 +19,7 @@ const AlertButton = () => {
     };
 
     return (
-        <button onClick={handleAlert}>Send Alert</button>
+        <button className='mt-7 bg-[#71d671] p-3 px-7 hover:p-4 hover:px-8 hover:shadow-lg shadow-black transition-all  rounded-2xl text-lg font-semibold  ' onClick={handleAlert}>Send Alert</button>
     );
 };
 

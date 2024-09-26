@@ -27,15 +27,16 @@ const SubscriptionForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='flex flex-row justify-center items-center'>
       <input
+        className='outline-none p-3 pr-12 rounded-tl-2xl rounded-bl-2xl bg-[#1e1e38] drop-shadow-lg shadow-lg text-[#e0eecd] text-lg font-medium'
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
         required
       />
-      <button type="submit">Subscribe</button>
+      <button className='bg-[#71d671] p-[10px] font-semibold text-lg h-[52px] rounded-tr-2xl rounded-br-2xl' type="submit">Subscribe</button>
     </form>
   );
 };
