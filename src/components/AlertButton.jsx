@@ -3,7 +3,7 @@ import React from 'react';
 const AlertButton = () => {
     const handleAlert = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/alert', {
+            const response = await fetch('https://custom-alert-backend.onrender.com/api/alert', {
                 method: 'POST',
             });
             const data = await response.json();

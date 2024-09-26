@@ -6,7 +6,7 @@ const SubscriptionForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/subscribe', {
+      const response = await fetch('https://custom-alert-backend.onrender.com/api/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
