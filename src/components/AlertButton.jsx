@@ -5,20 +5,8 @@ const AlertButton = () => {
     let [isAdmin, setIsAdmin] = useState(false);
     let [showIsAdmin, setShowIsAdmin] = useState(true)
 
-    const requestNotificationPermission = async () => {
-        if ('Notification' in window) {
-            const permission = await Notification.requestPermission();
-            if (permission !== 'granted') {
-                alert('You need to allow notifications to receive alerts.');
-            }
-        } else {
-            alert('Your browser does not support notifications.');
-        }
-    };
-
     const handleAlert = async () => {
         try {
-            requestNotificationPermission();
             const response = await fetch('https://custom-alert-backend.onrender.com/api/alert', {
                 method: 'POST',
             });
