@@ -1,33 +1,54 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const NotificationHandler = () => {
-  useEffect(() => {
-    const connectWebSocket = () => {
-      const ws = new WebSocket('wss://custom-alert-backend.onrender.com');
+  const connectWebSocket = useCallback(() => {
+    const ws = new WebSocket('ws://custom-alert-backend.onrender.com');
 
-      ws.onopen = () => {
-        console.log('Connected to WebSocket server');
-      };
-
-      ws.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        if (data.type === 'alert') {
-          new Notification('Alert', { body: data.message });
-        }
-      };
-
-      ws.onclose = () => {
-        console.log('Disconnected from WebSocket server. Attempting to reconnect...');
-        setTimeout(connectWebSocket, 5000);
-      };
-
-      ws.onerror = (error) => {
-        console.error('WebSocket error:', error);
-      };
+    ws.onopen = () => {
+      console.log('Connected to WebSocket server');
     };
 
-    connectWebSocket();
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === 'alert' && 'Notification' in window) {
+          Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+              new Notification('Alert', { body: data.message });
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Error processing message:', error);
+      }
+    };
+
+    ws.onclose = (event) => {
+      console.log('Disconnected from WebSocket server:', event.reason);
+      setTimeout(connectWebSocket, 3000);
+    };
+
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    return ws;
   }, []);
+
+  useEffect(() => {
+    let ws;
+    try {
+      ws = connectWebSocket();
+    } catch (error) {
+      console.error('Failed to connect to WebSocket:', error);
+    }
+
+    return () => {
+      if (ws) {
+        ws.close();
+      }
+    };
+  }, [connectWebSocket]);
 
   return null;
 };
