@@ -56,9 +56,9 @@ const SubscriptionForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='w-full max-w-[360px] flex flex-col sm:flex-row justify-center items-center'>
+    <form onSubmit={handleSubmit} className='w-full max-w-[360px] flex flex-row justify-center items-center '>
       <input
-        className='w-full sm:w-auto outline-none p-2 sm:p-3 sm:pr-12 rounded-t-2xl sm:rounded-tr-none sm:rounded-l-2xl bg-[#1e1e38] drop-shadow-lg shadow-lg text-[#e0eecd] text-lg font-medium mb-2 sm:mb-0'
+        className=' outline-none p-2 sm:p-3 sm:pr-12 rounded-tl-2xl rounded-bl-2xl   bg-[#1e1e38] drop-shadow-lg shadow-lg text-[#e0eecd] text-lg font-medium '
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -66,7 +66,7 @@ const SubscriptionForm = () => {
         required
       />
       <button 
-        className='w-full sm:w-auto bg-[#71d671] p-2 sm:p-[10px] font-semibold text-lg sm:h-[52px] rounded-b-2xl sm:rounded-bl-none sm:rounded-r-2xl' 
+        className=' bg-[#71d671] p-2 sm:p-[10px] font-semibold text-lg sm:h-[52px] rounded-tr-2xl rounded-br-2xl' 
         type="submit"
       >
         Subscribe
